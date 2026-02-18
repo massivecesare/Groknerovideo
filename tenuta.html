@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Scopri la Tenuta Bubblebee: 10 ettari di campi di grano e uliveti sulle colline di Sant'Eusanio del Sangro, con vista mozzafiato sulla Maiella. Luxury glamping in Abruzzo.">
+    <meta name="description" content="La Tenuta Bubblebee: 10 ettari di campi di grano e uliveti a Sant'Eusanio del Sangro, vista Maiella, 4 suite esclusive in bolle trasparenti.">
     <title>La Tenuta • Bubblebee Luxury B&B</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,6 +15,7 @@
         .nav-link:hover:after, .active:after { width:100%; }
         .active { color: #fcd34d !important; }
         .feature-icon { font-size: 3rem; }
+        .suite-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgba(212,175,55,0.3); }
         @media (min-width: 1024px) {
             .feature-icon { font-size: 4rem; }
         }
@@ -22,7 +23,7 @@
 </head>
 <body class="bg-stone-950 text-stone-200 font-sans">
 
-    <!-- NAVBAR (stessa della home) -->
+    <!-- NAVBAR -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-amber-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3">
@@ -38,6 +39,8 @@
                 <a href="tenuta.html" class="nav-link active">La Tenuta</a>
                 <a href="stanze.html" class="nav-link">Le Bolle</a>
                 <a href="esperienze.html" class="nav-link">Esperienze</a>
+                <a href="territorio.html" class="nav-link">Il Territorio</a>
+                <a href="bottega.html" class="nav-link">La Bottega</a>
                 <a href="galleria.html" class="nav-link">Galleria</a>
                 <a href="contatti.html" class="nav-link">Contatti</a>
             </div>
@@ -51,22 +54,23 @@
 
         <div id="mobile-menu" class="hidden lg:hidden bg-stone-950 border-t border-amber-900">
             <div class="px-6 py-8 flex flex-col items-center gap-6 text-lg">
-                <a href="index.html" class="hover:text-amber-300">Home</a>
-                <a href="tenuta.html" class="hover:text-amber-300">La Tenuta</a>
-                <a href="stanze.html" class="hover:text-amber-300">Le Bolle</a>
-                <a href="esperienze.html" class="hover:text-amber-300">Esperienze</a>
-                <a href="galleria.html" class="hover:text-amber-300">Galleria</a>
-                <a href="contatti.html" class="hover:text-amber-300">Contatti</a>
-                <a href="contatti.html" class="mt-4 bg-amber-500 text-stone-950 px-8 py-4 rounded-full">Prenota ora</a>
+                <a href="index.html">Home</a>
+                <a href="tenuta.html">La Tenuta</a>
+                <a href="stanze.html">Le Bolle</a>
+                <a href="esperienze.html">Esperienze</a>
+                <a href="territorio.html">Il Territorio</a>
+                <a href="bottega.html">La Bottega</a>
+                <a href="galleria.html">Galleria</a>
+                <a href="contatti.html">Contatti</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO PAGE -->
+    <!-- HERO -->
     <section class="pt-28 pb-16 lg:pb-24 bg-gradient-to-b from-stone-950 to-stone-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center">
             <h1 class="heading-font text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6">La Tenuta</h1>
-            <p class="text-xl md:text-2xl lg:text-3xl text-amber-100 max-w-4xl mx-auto">10 ettari di campi di grano dorato e uliveti secolari sulle dolci colline abruzzesi, con vista panoramica sulla Maiella.</p>
+            <p class="text-xl md:text-2xl lg:text-3xl text-amber-100 max-w-4xl mx-auto">10 ettari di campi di grano dorato e uliveti secolari sulle dolci colline abruzzesi, con vista panoramica sulla Maiella e 4 suite esclusive in bolle trasparenti.</p>
         </div>
     </section>
 
@@ -77,8 +81,8 @@
                 <div class="order-2 lg:order-1">
                     <h2 class="heading-font text-4xl lg:text-5xl font-bold mb-8">Un angolo di paradiso immerso nella natura</h2>
                     <div class="prose prose-lg prose-invert max-w-none space-y-6 text-stone-300">
-                        <p>Bubblebee Luxury B&B sorge a <strong>Sant'Eusanio del Sangro</strong> (CH), in provincia di Chieti, a circa 207 metri s.l.m., sulle colline della Valle del Sangro.</p>
-                        <p>La tenuta si estende su 10 ettari di terreno prevalentemente coltivato a grano, con inserti di uliveti e aree naturali. La posizione privilegiata regala una vista spettacolare sulla <strong>Maiella</strong> innevata a sud-ovest e sulle colline che degradano verso il mare Adriatico a est.</p>
+                        <p>Bubblebee Luxury B&B sorge a <strong>Sant'Eusanio del Sangro</strong> (CH), a circa 207 metri s.l.m., sulle colline della Valle del Sangro.</p>
+                        <p>La tenuta si estende su 10 ettari di terreno prevalentemente coltivato a grano, con uliveti secolari e aree naturali incontaminate. La posizione privilegiata regala una vista spettacolare sulla <strong>Maiella</strong> innevata a sud-ovest e sulle colline che degradano verso il mare Adriatico a est.</p>
                         <p>Il silenzio è rotto solo dal vento tra le spighe, dal canto degli uccelli e, nelle sere d'estate, dal verso dei grilli. Qui il tempo rallenta, permettendo un vero distacco dalla routine quotidiana.</p>
                     </div>
                 </div>
@@ -89,7 +93,87 @@
         </div>
     </section>
 
-    <!-- CARATTERISTICHE / ICONS -->
+    <!-- LE 4 SUITE ESCLUSIVE -->
+    <section class="py-16 lg:py-24 bg-stone-950">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <h2 class="heading-font text-4xl lg:text-5xl font-bold text-center mb-16">Le nostre 4 suite esclusive</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+                <!-- Suite 1: Deluxe Classic -->
+                <div class="suite-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl transition-all">
+                    <img src="bubbleroom1.jpg" alt="Bolla Deluxe Classic" class="w-full h-64 object-cover">
+                    <div class="p-6 lg:p-8">
+                        <h3 class="heading-font text-2xl lg:text-3xl font-bold mb-3">Deluxe Classic</h3>
+                        <p class="text-amber-400 text-xl font-bold mb-4">da € 320/notte</p>
+                        <ul class="space-y-3 text-sm lg:text-base text-stone-300">
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Letto king size</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Jacuzzi privata riscaldata</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Bagno interno con doccia</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Vista 360° sui campi</li>
+                        </ul>
+                        <p class="mt-4 text-stone-400 text-sm">Ideale per coppie romantiche.</p>
+                    </div>
+                </div>
+
+                <!-- Suite 2: Deluxe Moonlight -->
+                <div class="suite-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl transition-all">
+                    <img src="bubbleroom2.jpg" alt="Bolla Deluxe Moonlight" class="w-full h-64 object-cover">
+                    <div class="p-6 lg:p-8">
+                        <h3 class="heading-font text-2xl lg:text-3xl font-bold mb-3">Deluxe Moonlight</h3>
+                        <p class="text-amber-400 text-xl font-bold mb-4">da € 340/notte</p>
+                        <ul class="space-y-3 text-sm lg:text-base text-stone-300">
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Illuminazione LED romantica</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Jacuzzi + telescopio</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Doccia esterna stellata</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Letto king con baldacchino</li>
+                        </ul>
+                        <p class="mt-4 text-stone-400 text-sm">Perfetta per notti stellate indimenticabili.</p>
+                    </div>
+                </div>
+
+                <!-- Suite 3: Prestige Family -->
+                <div class="suite-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl transition-all">
+                    <img src="bubbleroom-family.jpg" alt="Bolla Prestige Family" class="w-full h-64 object-cover">
+                    <div class="p-6 lg:p-8">
+                        <h3 class="heading-font text-2xl lg:text-3xl font-bold mb-3">Prestige Family</h3>
+                        <p class="text-amber-400 text-xl font-bold mb-4">da € 420/notte</p>
+                        <ul class="space-y-3 text-sm lg:text-base text-stone-300">
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Due ambienti comunicanti</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Divano letto + letto king</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Jacuzzi grande + piscina condivisa</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Terrazza familiare panoramica</li>
+                        </ul>
+                        <p class="mt-4 text-stone-400 text-sm">Fino a 4 persone, ideale per famiglie o amici.</p>
+                    </div>
+                </div>
+
+                <!-- Suite 4: Prestige Romantic -->
+                <div class="suite-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl transition-all">
+                    <img src="bubbleroom-romantic.jpg" alt="Bolla Prestige Romantic" class="w-full h-64 object-cover">
+                    <div class="p-6 lg:p-8">
+                        <h3 class="heading-font text-2xl lg:text-3xl font-bold mb-3">Prestige Romantic</h3>
+                        <p class="text-amber-400 text-xl font-bold mb-4">da € 460/notte</p>
+                        <ul class="space-y-3 text-sm lg:text-base text-stone-300">
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Jacuzzi oversize con vista Maiella</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Letto king con petali e champagne</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Doccia esterna + sauna privata</li>
+                            <li><i class="fas fa-check text-amber-400 mr-2"></i>Illuminazione intima regolabile</li>
+                        </ul>
+                        <p class="mt-4 text-stone-400 text-sm">Lusso estremo per coppie in luna di miele o anniversario.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-16">
+                <a href="stanze.html" class="inline-flex items-center gap-4 px-10 py-6 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xl rounded-full transition-all">
+                    Scopri tutte le suite in dettaglio <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARATTERISTICHE GENERALI DELLA TENUTA -->
     <section class="py-16 lg:py-24 bg-stone-950">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
             <h2 class="heading-font text-4xl lg:text-5xl font-bold text-center mb-16">Cosa rende unica la nostra tenuta</h2>
@@ -97,22 +181,22 @@
                 <div>
                     <div class="text-amber-400 feature-icon mb-6"><i class="fas fa-seedling"></i></div>
                     <h3 class="text-2xl lg:text-3xl font-bold mb-4">10 ettari di natura</h3>
-                    <p class="text-stone-400">Campi di grano, uliveti e aree verdi incontaminate per privacy assoluta.</p>
+                    <p class="text-stone-400">Campi di grano, uliveti e aree verdi per privacy assoluta.</p>
                 </div>
                 <div>
                     <div class="text-amber-400 feature-icon mb-6"><i class="fas fa-mountain"></i></div>
                     <h3 class="text-2xl lg:text-3xl font-bold mb-4">Vista 360° Maiella</h3>
-                    <p class="text-stone-400">Panorama mozzafiato sulla montagna sacra degli abruzzesi, innevata d'inverno.</p>
+                    <p class="text-stone-400">Panorama mozzafiato sulla montagna sacra, innevata d'inverno.</p>
                 </div>
                 <div>
                     <div class="text-amber-400 feature-icon mb-6"><i class="fas fa-leaf"></i></div>
                     <h3 class="text-2xl lg:text-3xl font-bold mb-4">Sostenibilità</h3>
-                    <p class="text-stone-400">Agricoltura naturale, raccolta olive manuale, zero pesticidi chimici.</p>
+                    <p class="text-stone-400">Agricoltura naturale, zero pesticidi, raccolta olive manuale.</p>
                 </div>
                 <div>
                     <div class="text-amber-400 feature-icon mb-6"><i class="fas fa-map-marker-alt"></i></div>
                     <h3 class="text-2xl lg:text-3xl font-bold mb-4">Posizione strategica</h3>
-                    <p class="text-stone-400">A 20-30 min dalla Costa dei Trabocchi e dall'Oasi WWF Serranella.</p>
+                    <p class="text-stone-400">20-30 min dalla Costa dei Trabocchi e Oasi WWF Serranella.</p>
                 </div>
             </div>
         </div>
@@ -129,11 +213,10 @@
                         <p><strong>Coordinate GPS:</strong> 42.166°N 14.334°E</p>
                         <p><strong>Altitudine:</strong> circa 207 m s.l.m.</p>
                         <p>Siamo immersi nelle colline tra la Valle del Sangro e le prime pendici della Maiella, in un territorio antico con una storia che risale all'epoca romana (antico nome Euxanum).</p>
-                        <p>Nelle vicinanze: Oasi WWF Riserva Naturale Serranella (laghetto e bosco con fauna locale), borghi medievali come Casoli e Roccascalegna, e la Costa dei Trabocchi a breve distanza.</p>
+                        <p>Nelle vicinanze: Oasi WWF Riserva Naturale Serranella, borghi medievali come Casoli e Roccascalegna, e la Costa dei Trabocchi a breve distanza.</p>
                     </div>
                 </div>
                 <div class="rounded-3xl overflow-hidden shadow-2xl h-96 lg:h-[500px]">
-                    <!-- Embed Google Maps centrato su Via Castellata 6, Sant'Eusanio del Sangro -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.5!2d14.332!3d42.166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f0b0b0b0b0b0b%3A0x0!2zNDLCsDA5JzU4LjAiTiAxNMKwMjAnMDAuMCJF!5e0!3m2!1sit!2sit!4v1730000000000!5m2!1sit!2sit" 
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
