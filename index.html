@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubblebee Luxury B&B • Glamping di lusso in Abruzzo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+        
+        .hero-video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .teaser-video {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .teaser-card:hover .teaser-video {
+            transform: scale(1.08);
+        }
+        .nav-link:after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0;
+            background-color: #d4af37; transition: width 0.3s;
+        }
+        .nav-link:hover:after, .active:after { width: 100%; }
+    </style>
+</head>
+<body class="bg-stone-950 text-stone-200 font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-amber-900">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="images/logo1.JPG" alt="Logo" class="h-12 lg:h-14">
+                <div>
+                    <span class="heading-font text-4xl font-bold tracking-tighter">Bubblebee</span>
+                    <p class="text-xs text-amber-400 -mt-1 tracking-[3px]">LUXURY B&amp;B</p>
+                </div>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-10 text-base font-medium">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="tenuta.html" class="nav-link">La Tenuta</a>
+                <a href="stanze.html" class="nav-link">Le Bolle</a>
+                <a href="esperienze.html" class="nav-link">Esperienze</a>
+                <a href="territorio.html" class="nav-link">Il Territorio</a>
+                <a href="bottega.html" class="nav-link">La Bottega</a>
+                <a href="galleria.html" class="nav-link">Galleria</a>
+                <a href="contatti.html" class="nav-link">Contatti</a>
+            </div>
+
+            <a href="contatti.html" class="hidden lg:flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold px-8 py-4 rounded-full transition-all">
+                <i class="fas fa-calendar"></i> PRENOTA ORA
+            </a>
+
+            <button id="mobile-btn" class="lg:hidden text-3xl text-amber-300"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- HERO CON VIDEO -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/tenuta-drone.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/40"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex bg-white/10 backdrop-blur px-6 py-3 rounded-full mb-8 text-sm tracking-widest">
+                SANT'EUSANIO DEL SANGRO • ABRUZZO
+            </div>
+            <h1 class="heading-font text-6xl md:text-7xl lg:text-8xl font-bold leading-none text-white">
+                LUSSO<br>SOTTO LE STELLE
+            </h1>
+            <p class="mt-8 text-xl md:text-2xl lg:text-3xl text-amber-100">
+                Bolle trasparenti immerse nei campi di grano.<br>
+                Vista mozzafiato sulla Maiella.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+                <a href="stanze.html" class="px-10 py-6 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xl rounded-full">Scopri le Bolle</a>
+                <a href="contatti.html" class="px-10 py-6 border-2 border-white hover:bg-white hover:text-stone-950 text-white font-medium text-xl rounded-full">Prenota la tua fuga</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEASER CARDS CON VIDEO -->
+    <section class="py-20 lg:py-32 bg-stone-900">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <h2 class="heading-font text-5xl lg:text-6xl font-bold text-center mb-16">Scopri Bubblebee</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+
+                <!-- 1 La Tenuta -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/vista-tenuta.jpeg">
+                        <source src="videos/tenuta-pan.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">La Tenuta</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">10 ettari di grano dorato, uliveti e vista sulla Maiella innevata.</p>
+                        <a href="tenuta.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Scopri la tenuta <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2 Le Bolle -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/bubbleroom1.jpg">
+                        <source src="videos/bolle-notte.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Le Bolle</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Suite trasparenti con jacuzzi privata e vista 360° sulle stelle.</p>
+                        <a href="stanze.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Vedi tutte le bolle <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3 Esperienze -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/raccolta-olive.jpeg">
+                        <source src="videos/raccolta-olive.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Esperienze</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Yoga al tramonto, massaggi, raccolta olive e presepe vivente.</p>
+                        <a href="esperienze.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Scopri le esperienze <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4 Il Territorio -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/costa-dei-trabocchi.webp">
+                        <source src="videos/trabocchi-tramonto.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Il Territorio</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Maiella, Costa dei Trabocchi, Oasi WWF e borghi medievali a pochi minuti.</p>
+                        <a href="territorio.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Esplora il territorio <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5 La Bottega -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/raccolta-olive.jpeg">
+                        <source src="videos/olio-evo.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">La Bottega</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Olio EVO nostro, formaggi, salumi, miele e conserve abruzzesi.</p>
+                        <a href="bottega.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Scopri la bottega <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 6 Galleria -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
+                    <video class="teaser-video" muted loop autoplay playsinline poster="images/tenuta-bubblebee.jpeg">
+                        <source src="videos/drone-tenuta.mp4" type="video/mp4">
+                    </video>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Galleria</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Video e immagini della tenuta, delle bolle e dei momenti più belli.</p>
+                        <a href="galleria.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Entra nella galleria <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 7 Contatti -->
+                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl col-span-1 md:col-span-2 lg:col-span-1">
+                    <div class="h-[380px] bg-gradient-to-br from-amber-900/40 to-stone-900 flex items-center justify-center">
+                        <i class="fas fa-envelope text-8xl text-amber-400 opacity-70"></i>
+                    </div>
+                    <div class="p-8 lg:p-10">
+                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Contatti & Prenotazioni</h3>
+                        <p class="text-stone-300 text-base lg:text-lg mb-6">Scrivici per disponibilità e richieste speciali.</p>
+                        <a href="contatti.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
+                            Contattaci ora <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-amber-900">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <img src="images/logo1.JPG" class="h-10">
+                    <div class="text-sm leading-none">
+                        <span class="heading-font text-3xl">Bubblebee</span><br>
+                        <span class="text-amber-400">LUXURY B&amp;B</span>
+                    </div>
+                </div>
+                <div class="text-stone-500 text-sm">
+                    Via Castellata 6 • 66037 Sant'Eusanio del Sangro (CH)<br>
+                    P.IVA 02853900690 • © 2026 Bubblebee Luxury B&amp;B
+                </div>
+                <div class="flex gap-8 text-2xl">
+                    <a href="#" class="hover:text-amber-400"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-amber-400"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            btn.innerHTML = menu.classList.contains('hidden') 
+                ? '<i class="fas fa-bars"></i>' 
+                : '<i class="fas fa-times"></i>';
+        });
+    </script>
+</body>
+</html>
