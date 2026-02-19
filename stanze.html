@@ -40,13 +40,19 @@
       transform: translateY(-12px);
       box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.25);
     }
+    .romantic-gallery-wrapper {
+      position: relative;
+    }
     .romantic-gallery {
       display: flex;
       overflow-x: auto;
       gap: 1.5rem;
-      padding: 1rem 0;
+      padding: 1rem 0 2rem 0; /* spazio sotto per non coprire frecce */
       scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
     }
+    .romantic-gallery::-webkit-scrollbar { display: none; }
     .romantic-gallery img {
       flex: 0 0 85%;
       height: 420px;
@@ -57,6 +63,39 @@
     }
     @media (min-width: 768px) {
       .romantic-gallery img { flex: 0 0 60%; height: 500px; }
+    }
+
+    /* Frecce piccole ed eleganti – sempre visibili anche su mobile */
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(30,30,30,0.5);
+      backdrop-filter: blur(10px);
+      color: var(--gold);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      z-index: 10;
+      border: 1px solid var(--gold);
+      font-size: 0.9rem; /* icona piccola */
+    }
+    .gallery-arrow:hover {
+      opacity: 1;
+      background: rgba(212,175,55,0.25);
+      transform: translateY(-50%) scale(1.15);
+    }
+    .gallery-arrow.left {
+      left: 8px;
+    }
+    .gallery-arrow.right {
+      right: 8px;
     }
   </style>
 </head>
@@ -80,7 +119,7 @@
         <a href="esperienze.html"   class="nav-link">Esperienze</a>
         <a href="territorio.html"   class="nav-link">Il Territorio</a>
         <a href="bottega.html"      class="nav-link">La Bottega</a>
-        <a href="sala-eventi.html"     class="nav-link">Sala eventi</a>
+        <a href="sala-eventi.html"  class="nav-link">Sala Eventi</a>
         <a href="contatti.html"     class="nav-link">Contatti</a>
       </div>
 
@@ -102,7 +141,7 @@
         <a href="esperienze.html">Esperienze</a>
         <a href="territorio.html">Il Territorio</a>
         <a href="bottega.html">La Bottega</a>
-        <a href="sala-eventi.htmll">Sala eventi</a>
+        <a href="sala-eventi.html">Sala Eventi</a>
         <a href="contatti.html">Contatti</a>
         <a href="contatti.html" class="mt-4 inline-block bg-amber-600 text-white px-10 py-4 rounded-full font-semibold">Prenota ora</a>
       </div>
@@ -122,19 +161,23 @@
     </div>
   </section>
 
-  <!-- RACCONTO ROMANTICO + GALLERIA -->
+  <!-- RACCONTO ROMANTICO + GALLERIA CON FRECCE -->
   <section class="py-16 lg:py-24 bg-stone-950">
     <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center">
       <p class="text-xl lg:text-2xl leading-relaxed text-stone-300 italic mb-12 max-w-4xl mx-auto">
         Immagina di sdraiarti su lenzuola di lino fresco, con il profumo del grano che entra piano dalla trasparenza della bolla. Sopra di te, un cielo infinito punteggiato di stelle, la Via Lattea che sembra sfiorarti. La luna illumina dolcemente la tua pelle, mentre il calore della jacuzzi privata avvolge i vostri corpi. Non c’è rumore, solo il battito del cuore dell’altro e il fruscio leggero del vento tra le spighe. Qui il tempo si ferma. Qui il mondo è solo vostro. Qui non si dorme… si sogna ad occhi aperti.
       </p>
 
-      <!-- Galleria romantica orizzontale -->
-      <div class="romantic-gallery">
-        <img src="1.jpeg" alt="Interno bolla sotto le stelle" loading="lazy">
-        <img src="2.jpeg" alt="Tramonto visto dalla bolla" loading="lazy">
-        <img src="8.jpeg" alt="Jacuzzi illuminata sotto la luna" loading="lazy">
-        <img src="4.jpeg" alt="Momento intimo nella bolla" loading="lazy">
+      <!-- Galleria romantica orizzontale con frecce piccole -->
+      <div class="romantic-gallery-wrapper relative">
+        <div class="romantic-gallery">
+          <img src="1.jpeg" alt="Interno bolla sotto le stelle" loading="lazy">
+          <img src="2.jpeg" alt="Tramonto visto dalla bolla" loading="lazy">
+          <img src="8.jpeg" alt="Jacuzzi illuminata sotto la luna" loading="lazy">
+          <img src="4.jpeg" alt="Momento intimo nella bolla" loading="lazy">
+        </div>
+        <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -251,7 +294,7 @@
   </footer>
 
   <script>
-    // Mobile menu toggle con cambio icona (bars → times e viceversa)
+    // Mobile menu toggle con cambio icona
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
 
@@ -262,6 +305,42 @@
       } else {
         btn.innerHTML = '<i class="fas fa-times"></i>';
       }
+    });
+
+    // Gestione frecce per la galleria romantica (sempre visibili)
+    document.querySelectorAll('.romantic-gallery-wrapper').forEach(wrapper => {
+      const gallery = wrapper.querySelector('.romantic-gallery');
+      const leftArrow = wrapper.querySelector('.gallery-arrow.left');
+      const rightArrow = wrapper.querySelector('.gallery-arrow.right');
+
+      function updateArrows() {
+        if (!gallery || !leftArrow || !rightArrow) return;
+        const isAtStart = gallery.scrollLeft <= 0;
+        const isAtEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1;
+
+        leftArrow.style.opacity = isAtStart ? '0.3' : '0.7';
+        leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+
+        rightArrow.style.opacity = isAtEnd ? '0.3' : '0.7';
+        rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      }
+
+      // Scroll con frecce
+      if (leftArrow) {
+        leftArrow.addEventListener('click', () => {
+          gallery.scrollBy({ left: -gallery.clientWidth * 0.85, behavior: 'smooth' });
+        });
+      }
+      if (rightArrow) {
+        rightArrow.addEventListener('click', () => {
+          gallery.scrollBy({ left: gallery.clientWidth * 0.85, behavior: 'smooth' });
+        });
+      }
+
+      // Aggiorna frecce all'avvio, scroll e resize
+      gallery.addEventListener('scroll', updateArrows);
+      window.addEventListener('resize', updateArrows);
+      updateArrows();
     });
   </script>
 
