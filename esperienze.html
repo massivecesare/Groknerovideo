@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Esperienze • Bubblebee Luxury B&B</title>
-  <meta name="description" content="Esperienze wellness (yoga al tramonto, massaggi) e attività legate al territorio (raccolta olive, presepe vivente di Sant'Eusanio del Sangro)."/>
+  <meta name="description" content="Esperienze wellness (yoga al tramonto, massaggi), natura (raccolta olive, passeggiate, mountain bike) e tradizioni (presepe vivente di Sant'Eusanio)."/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -14,12 +14,8 @@
       --gold: #d4af37;
       --gold-dark: #b8962e;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-    }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
     .nav-link {
       position: relative;
     }
@@ -46,6 +42,29 @@
       transform: translateY(-12px);
       box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.25);
     }
+    .experience-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .experience-gallery::-webkit-scrollbar { display: none; }
+    .experience-gallery img {
+      flex: 0 0 85%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 1rem;
+      scroll-snap-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    @media (min-width: 768px) {
+      .experience-gallery img { flex: 0 0 45%; height: 340px; }
+    }
+    @media (min-width: 1024px) {
+      .experience-gallery img { flex: 0 0 33%; height: 380px; }
+    }
   </style>
 </head>
 <body class="bg-stone-950 text-stone-100">
@@ -68,7 +87,7 @@
         <a href="esperienze.html"   class="nav-link active">Esperienze</a>
         <a href="territorio.html"   class="nav-link">Il Territorio</a>
         <a href="bottega.html"      class="nav-link">La Bottega</a>
-        <a href="sala-eventi.html"     class="nav-link">Sala Eventi</a>
+        <a href="sala-eventi.html"  class="nav-link">Sala Eventi</a>
         <a href="contatti.html"     class="nav-link">Contatti</a>
       </div>
 
@@ -105,7 +124,7 @@
       </h1>
       <p class="text-xl sm:text-2xl lg:text-3xl text-amber-200/90 max-w-4xl mx-auto">
         Dal profondo relax del corpo e della mente,<br class="hidden sm:block">
-        alle attività autentiche legate alla natura e alle tradizioni abruzzesi.
+        alle avventure autentiche nella natura abruzzese.
       </p>
     </div>
   </section>
@@ -121,7 +140,12 @@
 
         <!-- Yoga al tramonto -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="IMG_3110.png" alt="Yoga al tramonto nei campi di grano" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="IMG_3110.png" alt="Yoga al tramonto nei campi" loading="lazy">
+            <img src="yoga-2.jpg" alt="Posizione yoga con vista Maiella" loading="lazy">
+            <img src="yoga-gruppo.jpg" alt="Sessione yoga di gruppo al tramonto" loading="lazy">
+            <img src="yoga-sunset-close.jpg" alt="Dettaglio tramonto durante yoga" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Yoga al tramonto</h3>
             <p class="text-stone-300 mb-6">
@@ -134,7 +158,12 @@
 
         <!-- Massaggi -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="IMG_3111.png" alt="Massaggio rilassante in bolla" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="IMG_3111.png" alt="Massaggio rilassante in bolla" loading="lazy">
+            <img src="massaggio-olio.jpg" alt="Massaggio con oli essenziali" loading="lazy">
+            <img src="massaggio-hotstone.jpg" alt="Trattamento hot stone" loading="lazy">
+            <img src="massaggio-esterno.jpg" alt="Massaggio all'aperto con vista" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Massaggi & Trattamenti</h3>
             <p class="text-stone-300 mb-6">
@@ -145,9 +174,14 @@
           </div>
         </div>
 
-        <!-- Altri wellness (es. meditazione guidata) -->
+        <!-- Meditazione & Sound Healing -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="IMG_3112.png" alt="Meditazione guidata all'aperto" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="IMG_3112.png" alt="Meditazione guidata all'aperto" loading="lazy">
+            <img src="sound-healing-gong.jpg" alt="Sessione con gong e campane" loading="lazy">
+            <img src="meditazione-alba.jpg" alt="Meditazione all'alba nei campi" loading="lazy">
+            <img src="mindfulness-natura.jpg" alt="Mindfulness immersiva nella natura" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Meditazione & Sound Healing</h3>
             <p class="text-stone-300 mb-6">
@@ -161,7 +195,7 @@
     </div>
   </section>
 
-  <!-- ESPERIENZE TERRITORIO -->
+  <!-- NATURA & TRADIZIONI -->
   <section class="py-16 lg:py-24 bg-stone-950">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
       <h2 class="text-4xl lg:text-5xl heading-font font-bold text-center mb-16 text-amber-200">
@@ -172,7 +206,12 @@
 
         <!-- Raccolta olive -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="Leonardo-ulivo.JPG" alt="Raccolta olive a mano" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="Leonardo-ulivo.JPG" alt="Raccolta olive a mano" loading="lazy">
+            <img src="olive-raccolta-gruppo.jpg" alt="Gruppo durante la raccolta" loading="lazy">
+            <img src="olive-cesto.jpg" alt="Cesto di olive appena raccolte" loading="lazy">
+            <img src="degustazione-olio.jpg" alt="Degustazione olio nuovo" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Raccolta delle olive</h3>
             <p class="text-stone-300 mb-6">
@@ -185,7 +224,12 @@
 
         <!-- Presepe vivente -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="IMG_3114.png" alt="Presepe vivente di Sant'Eusanio del Sangro" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="IMG_3114.png" alt="Presepe vivente di Sant'Eusanio" loading="lazy">
+            <img src="presepe-vicino.jpg" alt="Figuranti nei vicoli del borgo" loading="lazy">
+            <img src="presepe-notte.jpg" alt="Presepe illuminato di sera" loading="lazy">
+            <img src="presepe-fuoco.jpg" alt="Scene tradizionali con fuochi" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Presepe Vivente di Sant'Eusanio</h3>
             <p class="text-stone-300 mb-6">
@@ -196,9 +240,14 @@
           </div>
         </div>
 
-        <!-- Passeggiate natura -->
+        <!-- Passeggiate naturalistiche -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <img src="IMG_3115.png" alt="Passeggiata nei campi al tramonto" class="w-full h-64 object-cover">
+          <div class="experience-gallery">
+            <img src="IMG_3115.png" alt="Passeggiata nei campi al tramonto" loading="lazy">
+            <img src="sentiero-maiella.jpg" alt="Sentiero verso la Maiella" loading="lazy">
+            <img src="birdwatching.jpg" alt="Birdwatching nell'Oasi Serranella" loading="lazy">
+            <img src="picnic-natura.jpg" alt="Picnic guidato nella natura" loading="lazy">
+          </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Passeggiate naturalistiche</h3>
             <p class="text-stone-300 mb-6">
@@ -206,6 +255,24 @@
               Possibilità di birdwatching e picnic.
             </p>
             <div class="text-sm text-amber-400/80">Tutto l'anno • Su prenotazione</div>
+          </div>
+        </div>
+
+        <!-- NUOVA: Escursioni in Mountain Bike -->
+        <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
+          <div class="experience-gallery">
+            <img src="mtb-collina.jpg" alt="Mountain bike tra le colline" loading="lazy">
+            <img src="mtb-grano.jpg" alt="Percorso tra i campi di grano" loading="lazy">
+            <img src="mtb-maiella.jpg" alt="Vista Maiella durante il giro in MTB" loading="lazy">
+            <img src="mtb-gruppo.jpg" alt="Gruppo in escursione guidata" loading="lazy">
+          </div>
+          <div class="p-8 lg:p-10">
+            <h3 class="text-3xl font-bold heading-font mb-4">Escursioni in Mountain Bike</h3>
+            <p class="text-stone-300 mb-6">
+              Pedala tra le colline della Valle del Sangro su percorsi guidati adatti a tutti i livelli: dai sentieri sterrati tra ulivi e vigneti fino ai panorami sulla Maiella. 
+              Noleggio bici, guida esperta e sosta picnic inclusi.
+            </p>
+            <div class="text-sm text-amber-400/80">Tutto l'anno (meteo permettendo) • Su prenotazione • Durata 2–4 ore</div>
           </div>
         </div>
 
