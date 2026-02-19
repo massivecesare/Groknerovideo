@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sala Eventi • Bubblebee Luxury B&B</title>
+  <meta name="description" content="Sala Eventi esclusiva su collina a Sant'Eusanio del Sangro: fino a 80 persone, vista Maiella, perfetta per matrimoni, compleanni, eventi aziendali e feste private."/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-dark: #b8962e;
+    }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    .event-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+    }
+    .event-gallery img {
+      flex: 0 0 85%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 1.5rem;
+      scroll-snap-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    @media (min-width: 768px) {
+      .event-gallery img { flex: 0 0 60%; height: 500px; }
+    }
+  </style>
+</head>
+<body class="bg-stone-950 text-stone-100">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-md border-b border-amber-900/50">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo1.JPG" alt="Bubblebee Logo" class="h-12 lg:h-14 w-auto">
+        <div>
+          <div class="text-3xl lg:text-4xl font-bold tracking-tight heading-font text-white">Bubblebee</div>
+          <div class="text-xs lg:text-sm text-amber-400 tracking-widest -mt-1">LUXURY B&amp;B</div>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-10 text-base font-medium">
+        <a href="index.html"        class="nav-link">Home</a>
+        <a href="tenuta.html"       class="nav-link">La Tenuta</a>
+        <a href="stanze.html"       class="nav-link">Le Bolle</a>
+        <a href="esperienze.html"   class="nav-link">Esperienze</a>
+        <a href="territorio.html"   class="nav-link">Il Territorio</a>
+        <a href="bottega.html"      class="nav-link">La Bottega</a>
+        <a href="sala-eventi.html"  class="nav-link active">Sala Eventi</a>
+        <a href="contatti.html"     class="nav-link">Contatti</a>
+      </div>
+
+      <a href="contatti.html" class="hidden lg:inline-flex items-center gap-3 bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+        <i class="far fa-calendar-alt"></i> Prenota ora
+      </a>
+
+      <button id="mobile-menu-btn" class="lg:hidden text-3xl text-amber-400">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-stone-950 border-t border-amber-900/50">
+      <div class="px-6 py-8 flex flex-col gap-6 text-center text-lg">
+        <a href="index.html">Home</a>
+        <a href="tenuta.html">La Tenuta</a>
+        <a href="stanze.html">Le Bolle</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="territorio.html">Il Territorio</a>
+        <a href="bottega.html">La Bottega</a>
+        <a href="sala-eventi.html" class="text-amber-400 font-medium">Sala Eventi</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="contatti.html" class="mt-4 inline-block bg-amber-600 text-white px-10 py-4 rounded-full font-semibold">Prenota ora</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-28 pb-16 lg:pt-40 lg:pb-24 bg-gradient-to-b from-stone-950 to-stone-900 text-center">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <h1 class="heading-font text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6">
+        Sala Eventi
+      </h1>
+      <p class="text-xl md:text-2xl lg:text-3xl text-amber-200/90 max-w-4xl mx-auto">
+        Un gioiello su collina con vista mozzafiato sulla Maiella, fino a 80 persone.
+      </p>
+    </div>
+  </section>
+
+  <!-- RACCONTO + GALLERIA -->
+  <section class="py-16 lg:py-24 bg-stone-950">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center">
+      <p class="text-xl lg:text-2xl leading-relaxed text-stone-300 mb-12 max-w-4xl mx-auto">
+        Immersa nel verde dei nostri 10 ettari, affacciata sulla vallata e sulla Maiella innevata, la nostra Sala Eventi è il luogo perfetto dove celebrare ciò che conta davvero. Matrimoni intimi, compleanni importanti, battesimi, feste di laurea, eventi aziendali, cene di gala o riunioni familiari: fino a 80 persone possono vivere un momento unico, circondati da natura, silenzio e luce naturale. Il pavimento in legno caldo, le grandi vetrate, l’illuminazione soffusa e la possibilità di allestire dehors esterno rendono ogni evento magico e personalizzabile. Qui non si organizza solo una festa… si crea un ricordo che durerà per sempre.
+      </p>
+
+      <!-- Galleria orizzontale suggestiva -->
+      <div class="event-gallery">
+        <img src="images/sala-interno-giorno.jpg" alt="Sala Eventi illuminata di giorno con vista Maiella" loading="lazy">
+        <img src="images/sala-matrimonio-tramonto.jpg" alt="Allestimento matrimonio al tramonto" loading="lazy">
+        <img src="images/sala-sera-luci.jpg" alt="Sala Eventi di sera con luci calde" loading="lazy">
+        <img src="images/sala-dehor-esterno.jpg" alt="Dehor esterno con vista collina" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- CARATTERISTICHE PRINCIPALI -->
+  <section class="py-16 lg:py-24 bg-stone-900">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <h2 class="heading-font text-4xl lg:text-5xl font-bold text-center mb-16 text-amber-200">
+        Perché scegliere la nostra Sala Eventi
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+
+        <div class="bg-stone-800/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-amber-900/30">
+          <div class="text-amber-400 text-6xl mb-6"><i class="fas fa-users"></i></div>
+          <h3 class="text-2xl lg:text-3xl font-bold mb-4">Fino a 80 persone</h3>
+          <p class="text-stone-300">Spazio modulabile per cerimonie intime o eventi più ampi, sempre con comfort e privacy garantiti.</p>
+        </div>
+
+        <div class="bg-stone-800/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-amber-900/30">
+          <div class="text-amber-400 text-6xl mb-6"><i class="fas fa-mountain"></i></div>
+          <h3 class="text-2xl lg:text-3xl font-bold mb-4">Vista Maiella mozzafiato</h3>
+          <p class="text-stone-300">Dalle grandi vetrate e dal dehors si gode uno dei panorami più belli dell’Abruzzo, perfetto per foto indimenticabili.</p>
+        </div>
+
+        <div class="bg-stone-800/60 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-amber-900/30">
+          <div class="text-amber-400 text-6xl mb-6"><i class="fas fa-palette"></i></div>
+          <h3 class="text-2xl lg:text-3xl font-bold mb-4">Personalizzazione totale</h3>
+          <p class="text-stone-300">Allestimenti, catering, fiori, luci, musica live, dj set, proiezioni: tutto curato insieme a voi.</p>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-16">
+        <a href="contatti.html" class="inline-flex items-center gap-4 px-12 py-6 bg-amber-600 hover:bg-amber-500 text-white text-xl lg:text-2xl font-semibold rounded-full transition-colors shadow-lg shadow-amber-900/30">
+          <i class="far fa-calendar-check text-2xl"></i> Richiedi disponibilità
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black py-16 border-t border-amber-900/30">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center md:text-left">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+        <div class="flex items-center gap-4">
+          <img src="logo1.JPG" alt="Logo" class="h-10">
+          <div class="text-sm leading-none">
+            <div class="heading-font text-3xl">Bubblebee</div>
+            <div class="text-amber-400">LUXURY B&amp;B</div>
+          </div>
+        </div>
+
+        <div class="text-stone-500 text-sm">
+          Via Castellata 6 • 66037 Sant'Eusanio del Sangro (CH)<br>
+          P.IVA 02853900690 • © 2026 Bubblebee Luxury B&amp;B
+        </div>
+
+        <div class="flex gap-8 text-3xl">
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle con cambio icona
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        btn.innerHTML = '<i class="fas fa-bars"></i>';
+      } else {
+        btn.innerHTML = '<i class="fas fa-times"></i>';
+      }
+    });
+  </script>
+
+</body>
+</html>
