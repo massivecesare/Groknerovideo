@@ -42,13 +42,17 @@
       transform: translateY(-12px);
       box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.25);
     }
+    .experience-gallery-wrapper {
+      position: relative;
+    }
     .experience-gallery {
       display: flex;
       overflow-x: auto;
       gap: 1rem;
-      padding: 1rem 0;
+      padding: 1rem 0 2rem 0; /* spazio sotto per non coprire frecce */
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
+      scroll-behavior: smooth;
     }
     .experience-gallery::-webkit-scrollbar { display: none; }
     .experience-gallery img {
@@ -65,11 +69,46 @@
     @media (min-width: 1024px) {
       .experience-gallery img { flex: 0 0 33%; height: 380px; }
     }
+
+    /* Frecce piccole ed eleganti – sempre visibili anche su mobile */
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(30,30,30,0.5);
+      backdrop-filter: blur(10px);
+      color: var(--gold);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      z-index: 10;
+      border: 1px solid var(--gold);
+      font-size: 0.9rem; /* icona più piccola */
+    }
+    .gallery-arrow:hover {
+      opacity: 1;
+      background: rgba(212,175,55,0.25);
+      transform: translateY(-50%) scale(1.15);
+    }
+    .gallery-arrow.left {
+      left: 8px;
+    }
+    .gallery-arrow.right {
+      right: 8px;
+    }
+    /* Sempre visibili, anche su mobile */
+    .gallery-arrow.hidden { display: none; } /* usata solo se vuoi nasconderle in casi specifici */
   </style>
 </head>
 <body class="bg-stone-950 text-stone-100">
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR (invariata) -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-md border-b border-amber-900/50">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
       <a href="index.html" class="flex items-center gap-3">
@@ -140,11 +179,15 @@
 
         <!-- Yoga al tramonto -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="IMG_3110.png" alt="Yoga al tramonto nei campi" loading="lazy">
-            <img src="yoga-2.jpg" alt="Posizione yoga con vista Maiella" loading="lazy">
-            <img src="yoga-gruppo.jpg" alt="Sessione yoga di gruppo al tramonto" loading="lazy">
-            <img src="yoga-sunset-close.jpg" alt="Dettaglio tramonto durante yoga" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="IMG_3110.png" alt="Yoga al tramonto nei campi" loading="lazy">
+              <img src="yoga-2.jpg" alt="Posizione yoga con vista Maiella" loading="lazy">
+              <img src="yoga-gruppo.jpg" alt="Sessione yoga di gruppo al tramonto" loading="lazy">
+              <img src="yoga-sunset-close.jpg" alt="Dettaglio tramonto durante yoga" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Yoga al tramonto</h3>
@@ -158,11 +201,15 @@
 
         <!-- Massaggi -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="IMG_3111.png" alt="Massaggio rilassante in bolla" loading="lazy">
-            <img src="massaggio-olio.jpg" alt="Massaggio con oli essenziali" loading="lazy">
-            <img src="massaggio-hotstone.jpg" alt="Trattamento hot stone" loading="lazy">
-            <img src="massaggio-esterno.jpg" alt="Massaggio all'aperto con vista" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="IMG_3111.png" alt="Massaggio rilassante in bolla" loading="lazy">
+              <img src="massaggio-olio.jpg" alt="Massaggio con oli essenziali" loading="lazy">
+              <img src="massaggio-hotstone.jpg" alt="Trattamento hot stone" loading="lazy">
+              <img src="massaggio-esterno.jpg" alt="Massaggio all'aperto con vista" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Massaggi & Trattamenti</h3>
@@ -176,11 +223,15 @@
 
         <!-- Meditazione & Sound Healing -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="Amaca1.jpg" alt="Meditazione guidata all'aperto" loading="lazy">
-            <img src="Amaca2.jpg" alt="Sessione con gong e campane" loading="lazy">
-            <img src="Amaca3.jpg" alt="Meditazione all'alba nei campi" loading="lazy">
-            <img src="Amaca4.jpg" alt="Mindfulness immersiva nella natura" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="Amaca1.jpg" alt="Meditazione guidata all'aperto" loading="lazy">
+              <img src="Amaca2.jpg" alt="Sessione con gong e campane" loading="lazy">
+              <img src="Amaca3.jpg" alt="Meditazione all'alba nei campi" loading="lazy">
+              <img src="Amaca4.jpg" alt="Mindfulness immersiva nella natura" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Meditazione & Sound Healing</h3>
@@ -206,11 +257,15 @@
 
         <!-- Raccolta olive -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="Leonardo-ulivo.JPG" alt="Raccolta olive a mano" loading="lazy">
-            <img src="Ulivo1.JPG" alt="Gruppo durante la raccolta" loading="lazy">
-            <img src="Ulivo2.JPG" alt="Cesto di olive appena raccolte" loading="lazy">
-            <img src="Ulivo3.JPG" alt="Degustazione olio nuovo" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="Leonardo-ulivo.JPG" alt="Raccolta olive a mano" loading="lazy">
+              <img src="Ulivo1.JPG" alt="Gruppo durante la raccolta" loading="lazy">
+              <img src="Ulivo2.JPG" alt="Cesto di olive appena raccolte" loading="lazy">
+              <img src="Ulivo3.JPG" alt="Degustazione olio nuovo" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Raccolta delle olive</h3>
@@ -224,11 +279,15 @@
 
         <!-- Presepe vivente -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="IMG_3114.png" alt="Presepe vivente di Sant'Eusanio" loading="lazy">
-            <img src="presepe-vicino.jpg" alt="Figuranti nei vicoli del borgo" loading="lazy">
-            <img src="presepe-notte.jpg" alt="Presepe illuminato di sera" loading="lazy">
-            <img src="presepe-fuoco.jpg" alt="Scene tradizionali con fuochi" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="IMG_3114.png" alt="Presepe vivente di Sant'Eusanio" loading="lazy">
+              <img src="presepe-vicino.jpg" alt="Figuranti nei vicoli del borgo" loading="lazy">
+              <img src="presepe-notte.jpg" alt="Presepe illuminato di sera" loading="lazy">
+              <img src="presepe-fuoco.jpg" alt="Scene tradizionali con fuochi" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Presepe Vivente di Sant'Eusanio</h3>
@@ -242,11 +301,15 @@
 
         <!-- Passeggiate naturalistiche -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="IMG_3115.png" alt="Passeggiata nei campi al tramonto" loading="lazy">
-            <img src="sentiero-maiella.jpg" alt="Sentiero verso la Maiella" loading="lazy">
-            <img src="birdwatching.jpg" alt="Birdwatching nell'Oasi Serranella" loading="lazy">
-            <img src="picnic-natura.jpg" alt="Picnic guidato nella natura" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="IMG_3115.png" alt="Passeggiata nei campi al tramonto" loading="lazy">
+              <img src="sentiero-maiella.jpg" alt="Sentiero verso la Maiella" loading="lazy">
+              <img src="birdwatching.jpg" alt="Birdwatching nell'Oasi Serranella" loading="lazy">
+              <img src="picnic-natura.jpg" alt="Picnic guidato nella natura" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Passeggiate naturalistiche</h3>
@@ -258,13 +321,17 @@
           </div>
         </div>
 
-        <!-- NUOVA: Escursioni in Mountain Bike -->
+        <!-- Escursioni in Mountain Bike -->
         <div class="experience-card rounded-3xl overflow-hidden border border-amber-900/30">
-          <div class="experience-gallery">
-            <img src="mtb-collina.jpg" alt="Mountain bike tra le colline" loading="lazy">
-            <img src="mtb-grano.jpg" alt="Percorso tra i campi di grano" loading="lazy">
-            <img src="mtb-maiella.jpg" alt="Vista Maiella durante il giro in MTB" loading="lazy">
-            <img src="mtb-gruppo.jpg" alt="Gruppo in escursione guidata" loading="lazy">
+          <div class="experience-gallery-wrapper relative">
+            <div class="experience-gallery">
+              <img src="mtb-collina.jpg" alt="Mountain bike tra le colline" loading="lazy">
+              <img src="mtb-grano.jpg" alt="Percorso tra i campi di grano" loading="lazy">
+              <img src="mtb-maiella.jpg" alt="Vista Maiella durante il giro in MTB" loading="lazy">
+              <img src="mtb-gruppo.jpg" alt="Gruppo in escursione guidata" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="p-8 lg:p-10">
             <h3 class="text-3xl font-bold heading-font mb-4">Escursioni in Mountain Bike</h3>
@@ -321,8 +388,46 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Gestione frecce per scorrere le gallerie (sempre visibili)
+    document.querySelectorAll('.experience-gallery-wrapper').forEach(wrapper => {
+      const gallery = wrapper.querySelector('.experience-gallery');
+      const leftArrow = wrapper.querySelector('.gallery-arrow.left');
+      const rightArrow = wrapper.querySelector('.gallery-arrow.right');
+
+      function updateArrows() {
+        if (!gallery || !leftArrow || !rightArrow) return;
+        const isAtStart = gallery.scrollLeft <= 0;
+        const isAtEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1;
+
+        // Non nascondiamo più su mobile – solo opacità bassa se non si può scorrere
+        leftArrow.style.opacity = isAtStart ? '0.3' : '0.7';
+        leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+
+        rightArrow.style.opacity = isAtEnd ? '0.3' : '0.7';
+        rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      }
+
+      // Scroll con frecce
+      if (leftArrow) {
+        leftArrow.addEventListener('click', () => {
+          gallery.scrollBy({ left: -gallery.clientWidth * 0.85, behavior: 'smooth' });
+        });
+      }
+      if (rightArrow) {
+        rightArrow.addEventListener('click', () => {
+          gallery.scrollBy({ left: gallery.clientWidth * 0.85, behavior: 'smooth' });
+        });
+      }
+
+      // Aggiorna frecce all'avvio, scroll e resize
+      gallery.addEventListener('scroll', updateArrows);
+      window.addEventListener('resize', updateArrows);
+      updateArrows();
     });
   </script>
 
