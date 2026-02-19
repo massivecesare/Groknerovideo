@@ -50,7 +50,7 @@
 </head>
 <body class="bg-stone-950 text-stone-200 font-sans">
 
-    <!-- NAVBAR (invariata) -->
+    <!-- NAVBAR aggiornata con Il Territorio e La Bottega -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-amber-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3">
@@ -66,7 +66,9 @@
                 <a href="tenuta.html" class="nav-link">La Tenuta</a>
                 <a href="stanze.html" class="nav-link">Le Bolle</a>
                 <a href="esperienze.html" class="nav-link">Esperienze</a>
-                <a href="galleria.html" class="nav-link">Galleria</a>
+                <a href="territorio.html" class="nav-link">Il Territorio</a>
+                <a href="bottega.html" class="nav-link">La Bottega</a>
+                <a href="galleria.html" class="nav-link">Sala Eventi</a>
                 <a href="contatti.html" class="nav-link">Contatti</a>
             </div>
 
@@ -77,13 +79,16 @@
             <button id="mobile-btn" class="lg:hidden text-3xl text-amber-300"><i class="fas fa-bars"></i></button>
         </div>
 
+        <!-- Mobile menu aggiornato -->
         <div id="mobile-menu" class="hidden lg:hidden bg-stone-950 border-t border-amber-900">
             <div class="px-6 py-8 flex flex-col items-center gap-6 text-lg">
                 <a href="index.html" class="hover:text-amber-300">Home</a>
                 <a href="tenuta.html" class="hover:text-amber-300">La Tenuta</a>
                 <a href="stanze.html" class="hover:text-amber-300">Le Bolle</a>
                 <a href="esperienze.html" class="hover:text-amber-300">Esperienze</a>
-                <a href="galleria.html" class="hover:text-amber-300">Galleria</a>
+                <a href="territorio.html" class="hover:text-amber-300">Il Territorio</a>
+                <a href="bottega.html" class="hover:text-amber-300">La Bottega</a>
+                <a href="galleria.html" class="hover:text-amber-300">Sala Eventi</a>
                 <a href="contatti.html" class="hover:text-amber-300">Contatti</a>
                 <a href="contatti.html" class="mt-4 bg-amber-500 text-stone-950 px-8 py-4 rounded-full">Prenota ora</a>
             </div>
@@ -95,7 +100,7 @@
         <video class="hero-video" autoplay muted loop playsinline poster="vista tenuta.jpeg">
             <source src="Videoindietrotenuta.MP4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-black/45"></div> <!-- overlay scuro per leggibilità testo -->
+        <div class="absolute inset-0 bg-black/45"></div>
 
         <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-12 text-center">
             <div class="max-w-5xl mx-auto">
@@ -111,7 +116,7 @@
         </div>
     </section>
 
-    <!-- TEASER SEZIONI (tutte con video) -->
+    <!-- TEASER SEZIONI (senza più la card Galleria) -->
     <section class="py-20 lg:py-32 bg-stone-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
             <h2 class="heading-font text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16">Scopri Bubblebee</h2>
@@ -121,7 +126,7 @@
                 <!-- La Tenuta -->
                 <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
                     <video class="teaser-video" muted loop autoplay playsinline poster="tenuta bubblebee.jpeg">
-                        <source src="Video-piscina.MP4" type="video/mp4">Vista maiella-vid.MP4
+                        <source src="Video-piscina.MP4" type="video/mp4">
                     </video>
                     <div class="p-8 lg:p-10">
                         <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">La Tenuta</h3>
@@ -188,21 +193,7 @@
                     </div>
                 </div>
 
-                <!-- Galleria -->
-                <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
-                    <video class="teaser-video" muted loop autoplay playsinline poster="WhatsApp Image 2026-02-07 at 12.11.30 (2).jpeg">
-                        <source src="videos/drone-tenuta.mp4" type="video/mp4">
-                    </video>
-                    <div class="p-8 lg:p-10">
-                        <h3 class="heading-font text-3xl lg:text-4xl font-bold mb-4">Galleria</h3>
-                        <p class="text-stone-300 text-base lg:text-lg mb-6">Immagini della tenuta, delle bolle al tramonto e di notte, momenti autentici e dettagli di lusso immersi nella natura.</p>
-                        <a href="galleria.html" class="inline-flex items-center gap-3 text-amber-400 hover:text-amber-300 font-medium text-lg">
-                            Guarda la galleria <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Contatti (rimane icona perché non c'è video logico qui) -->
+                <!-- Contatti (rimane come icona) -->
                 <div class="teaser-card bg-stone-800 rounded-3xl overflow-hidden shadow-xl">
                     <div class="h-[320px] lg:h-[380px] bg-gradient-to-br from-amber-900/40 to-stone-900 flex items-center justify-center">
                         <i class="fas fa-envelope text-8xl lg:text-9xl text-amber-500 opacity-70"></i>
@@ -220,7 +211,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (invariato) -->
+    <!-- FOOTER -->
     <footer class="bg-black py-16 border-t border-amber-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center md:text-left">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
@@ -248,8 +239,8 @@
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
-            btn.innerHTML = menu.classList.contains('hidden') 
-                ? '<i class="fas fa-bars"></i>' 
+            btn.innerHTML = menu.classList.contains('hidden')
+                ? '<i class="fas fa-bars"></i>'
                 : '<i class="fas fa-times"></i>';
         });
     </script>
