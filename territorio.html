@@ -14,11 +14,73 @@
         .nav-link:after { content:''; position:absolute; width:0; height:2px; bottom:-2px; left:0; background-color:var(--gold); transition:width .3s; }
         .nav-link:hover:after, .active:after { width:100%; }
         .active { color: #fcd34d !important; }
+
+        /* Stile per la galleria di Sant'Eusanio (uguale alle altre) */
+        .sant-eusanio-gallery-wrapper {
+          position: relative;
+        }
+        .sant-eusanio-gallery {
+          display: flex;
+          overflow-x: auto;
+          gap: 1rem;
+          padding: 1rem 0 2rem 0;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          scroll-behavior: smooth;
+        }
+        .sant-eusanio-gallery::-webkit-scrollbar { display: none; }
+        .sant-eusanio-gallery img {
+          flex: 0 0 85%;
+          height: 280px;
+          object-fit: cover;
+          border-radius: 1rem;
+          scroll-snap-align: center;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        @media (min-width: 768px) {
+          .sant-eusanio-gallery img { flex: 0 0 45%; height: 340px; }
+        }
+        @media (min-width: 1024px) {
+          .sant-eusanio-gallery img { flex: 0 0 33%; height: 380px; }
+        }
+
+        /* Frecce piccole ed eleganti – sempre visibili anche su mobile */
+        .gallery-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(30,30,30,0.5);
+          backdrop-filter: blur(10px);
+          color: var(--gold);
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          opacity: 0.7;
+          transition: all 0.3s ease;
+          z-index: 10;
+          border: 1px solid var(--gold);
+          font-size: 0.9rem;
+        }
+        .gallery-arrow:hover {
+          opacity: 1;
+          background: rgba(212,175,55,0.25);
+          transform: translateY(-50%) scale(1.15);
+        }
+        .gallery-arrow.left {
+          left: 8px;
+        }
+        .gallery-arrow.right {
+          right: 8px;
+        }
     </style>
 </head>
 <body class="bg-stone-950 text-stone-200 font-sans">
 
-    <!-- NAVBAR COMPLETA CON LE NUOVE PAGINE -->
+    <!-- NAVBAR -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-amber-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3">
@@ -36,7 +98,7 @@
                 <a href="esperienze.html" class="nav-link">Esperienze</a>
                 <a href="territorio.html" class="nav-link active">Il Territorio</a>
                 <a href="bottega.html" class="nav-link">La Bottega</a>
-                <a href="sala-eventi.html" class="nav-link">Sala eventi</a>
+                <a href="sala-eventi.html" class="nav-link">Sala Eventi</a>
                 <a href="contatti.html" class="nav-link">Contatti</a>
             </div>
 
@@ -55,7 +117,7 @@
                 <a href="esperienze.html">Esperienze</a>
                 <a href="territorio.html">Il Territorio</a>
                 <a href="bottega.html">La Bottega</a>
-                <a href="sala-eventi.html">Sala eventi</a>
+                <a href="sala-eventi.html">Sala Eventi</a>
                 <a href="contatti.html">Contatti</a>
             </div>
         </div>
@@ -114,7 +176,7 @@
         </div>
     </section>
 
-    <!-- MAPPA (corretta e funzionante) -->
+    <!-- MAPPA -->
     <section class="py-20 bg-stone-900">
         <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -126,18 +188,72 @@
                         <p>Autostrada A14 uscita Lanciano • 20 min dal mare • 30 min dall’aeroporto di Pescara</p>
                     </div>
                 </div>
-               <!-- MAPPA corretta e sempre centrata su Via Castellata 6 -->
-<div class="rounded-3xl overflow-hidden shadow-2xl h-[600px] lg:h-full">
-    <iframe 
-        src="https://maps.app.goo.gl/z5wR2PFHfXc4byJf7?g_st=iw"
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-</div>
+                <div class="rounded-3xl overflow-hidden shadow-2xl h-96 lg:h-[500px]">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.48!2d14.331998!3d42.166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f0b0b0b0b0b0b%3A0x0!2sVia+Castellata+6%2C+66037+Sant%27Eusanio+del+Sangro+CH%2C+Italia!5e0!3m2!1sit!2sit!4v1730000000000!5m2!1sit!2sit"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUOVA SEZIONE: Sant'Eusanio del Sangro -->
+    <section class="py-20 lg:py-28 bg-stone-950">
+        <div class="max-w-screen-2xl mx-auto px-6 lg:px-12">
+            <h2 class="heading-font text-5xl lg:text-6xl font-bold text-center mb-16 text-amber-200">
+                Sant'Eusanio del Sangro – Il nostro borgo
+            </h2>
+
+            <div class="max-w-4xl mx-auto text-lg lg:text-xl text-stone-300 leading-relaxed mb-12">
+                <p class="mb-6">Le origini sono incerte, ma il territorio era abitato già in epoca romana.</p>
+                <p class="mb-6">Il nome più antico legato alla zona è <strong>Euxanum</strong>, citato già nel 165 d.C. come luogo importante per le fiere di Lanciano.</p>
+                <p class="mb-6">Intorno all’XI–XII secolo appare Montecchio / Monteclo, poi <strong>Sanctum Eusanium</strong> (dal 1176 circa).</p>
+                <p class="mb-6">Il paese prende il nome da <strong>Sant’Eusanio</strong> (o Eusanzio), vescovo di Siponto (Manfredonia), che secondo la tradizione passò di lì e donò la vista a una donna cieca di nome Teoconia.</p>
+                <p class="mb-6">Il borgo fu colonizzato dai benedettini, poi feudo dell’Abbazia di San Giovanni in Venere, e successivamente sotto i padri filippini di Roma.</p>
+                <p class="mb-6">Durante la Seconda Guerra Mondiale fu zona di passaggio della Linea Gustav (invernale 1943–44): il Sangro fu linea del fronte tra Alleati e tedeschi, con combattimenti anche nelle vicinanze (località Brecciaio).</p>
+
+                <h3 class="heading-font text-3xl font-bold mt-10 mb-6 text-center">Cosa vedere e principali attrazioni</h3>
+                <ul class="list-disc list-inside max-w-3xl mx-auto space-y-3 mb-10">
+                    <li><strong>Casa Museo Cesare De Titta</strong> — la casa natale e museo dedicato al poeta (molto importante per la letteratura abruzzese in dialetto).</li>
+                    <li><strong>Chiesa dell’Assunta</strong> (o Santa Maria Assunta) — edificio neogotico del XIX secolo, principale chiesa del paese.</li>
+                    <li><strong>Chiesa di Sant’Eusanio</strong> — legata alla tradizione del santo patrono.</li>
+                    <li><strong>Oasi WWF Lago di Serranella</strong> (Riserva Naturale Controllata) — proprio ai piedi del paese, condivisa con Altino e Casoli: laghetto, birdwatching, sentieri naturalistici, molto apprezzata per escursioni.</li>
+                    <li>Centro storico con vicoli caratteristici e scorci sulla valle del Sangro.</li>
+                </ul>
+
+                <h3 class="heading-font text-3xl font-bold mt-10 mb-6 text-center">Persona illustre</h3>
+                <p class="mb-6">
+                    Il paese è famoso soprattutto per aver dato i natali a <strong>Cesare De Titta</strong> (1862–1933), uno dei più importanti poeti abruzzesi. Scriveva in italiano, latino e soprattutto in dialetto abruzzese (neapolitan abruzzese). Gabriele d’Annunzio frequentava il paese e passeggiava per i suoi vicoli quando andava a trovare De Titta, rendendolo un piccolo centro culturale di rilievo tra fine ’800 e inizio ’900.
+                </p>
+
+                <h3 class="heading-font text-3xl font-bold mt-10 mb-6 text-center">Altri aspetti</h3>
+                <ul class="list-disc list-inside max-w-3xl mx-auto space-y-3 mb-10">
+                    <li>È un paese agricolo e tranquillo, con un’economia basata su agricoltura, piccole attività e turismo lento/naturalistico.</li>
+                    <li>Molto gettonato per case vacanze e seconde case (ci sono parecchie proprietà in vendita o affitto su Airbnb, idealista, ecc.).</li>
+                    <li>Escursioni: diversi sentieri per hiking verso la Maiella, il lago di Serranella e la valle del Sangro (molto belli in primavera e autunno).</li>
+                </ul>
+
+                <p class="mt-10 italic text-center">
+                    In sintesi: un piccolo borgo abruzzese autentico, non turistico di massa, ma con un bel patrimonio naturalistico (l’oasi WWF), storico-letterario (De Titta) e una posizione strategica nella media valle del Sangro. Se cerchi pace, natura e un assaggio di Abruzzo autentico lontano dalle folle, è un ottimo posto.
+                </p>
+            </div>
+
+            <!-- Galleria scorrevole con frecce piccole -->
+            <div class="sant-eusanio-gallery-wrapper relative max-w-5xl mx-auto">
+                <div class="sant-eusanio-gallery">
+                    <img src="santeusanio-centro.jpg" alt="Centro storico di Sant'Eusanio del Sangro" loading="lazy">
+                    <img src="santeusanio-chiesa.jpg" alt="Chiesa dell'Assunta" loading="lazy">
+                    <img src="santeusanio-museo-detitta.jpg" alt="Casa Museo Cesare De Titta" loading="lazy">
+                    <img src="santeusanio-vicoli.jpg" alt="Vicoli e scorci del borgo" loading="lazy">
+                </div>
+                <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
@@ -171,6 +287,40 @@
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
             btn.innerHTML = menu.classList.contains('hidden') ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        });
+
+        // Gestione frecce per la galleria di Sant'Eusanio
+        document.querySelectorAll('.sant-eusanio-gallery-wrapper').forEach(wrapper => {
+          const gallery = wrapper.querySelector('.sant-eusanio-gallery');
+          const leftArrow = wrapper.querySelector('.gallery-arrow.left');
+          const rightArrow = wrapper.querySelector('.gallery-arrow.right');
+
+          function updateArrows() {
+            if (!gallery || !leftArrow || !rightArrow) return;
+            const isAtStart = gallery.scrollLeft <= 0;
+            const isAtEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1;
+
+            leftArrow.style.opacity = isAtStart ? '0.3' : '0.7';
+            leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+
+            rightArrow.style.opacity = isAtEnd ? '0.3' : '0.7';
+            rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+          }
+
+          if (leftArrow) {
+            leftArrow.addEventListener('click', () => {
+              gallery.scrollBy({ left: -gallery.clientWidth * 0.85, behavior: 'smooth' });
+            });
+          }
+          if (rightArrow) {
+            rightArrow.addEventListener('click', () => {
+              gallery.scrollBy({ left: gallery.clientWidth * 0.85, behavior: 'smooth' });
+            });
+          }
+
+          gallery.addEventListener('scroll', updateArrows);
+          window.addEventListener('resize', updateArrows);
+          updateArrows();
         });
     </script>
 </body>
