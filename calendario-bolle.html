@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendario Bolle • Bubblebee Luxury B&B</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --gold: #d4af37; }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    .suite-row { transition: all 0.4s ease; }
+    .suite-row:hover { background-color: rgba(212,175,55,0.05); }
+
+    .photo-gallery {
+      display: flex; overflow-x: auto; gap: 1rem; padding: 1rem 0;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+    }
+    .photo-gallery::-webkit-scrollbar { display: none; }
+    .photo-gallery img {
+      flex: 0 0 85%; height: 320px; object-fit: cover; border-radius: 1rem;
+      scroll-snap-align: center;
+    }
+    @media (min-width: 768px) {
+      .photo-gallery img { flex: 0 0 45%; height: 380px; }
+    }
+
+    .gallery-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(30,30,30,0.7); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; border: 1px solid var(--gold);
+      opacity: 0.8; transition: all 0.3s;
+    }
+    .gallery-arrow:hover { opacity: 1; background: rgba(212,175,55,0.2); }
+
+    /* Calendario */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      text-align: center;
+    }
+    .calendar-day {
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calendar-day.available { background: #166534; color: white; }
+    .calendar-day.booked { background: #991b1b; color: white; cursor: not-allowed; }
+    .calendar-day.past { background: #374151; color: #9ca3af; cursor: not-allowed; }
+    .calendar-day:hover.available { background: #22c55e; transform: scale(1.1); }
+  </style>
+</head>
+<body class="bg-stone-950 text-stone-100">
+
+  <!-- NAVBAR (invariata) -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-md border-b border-amber-900/50">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo1.JPG" alt="Bubblebee Logo" class="h-12 lg:h-14 w-auto">
+        <div>
+          <div class="text-3xl lg:text-4xl font-bold tracking-tight heading-font text-white">Bubblebee</div>
+          <div class="text-xs lg:text-sm text-amber-400 tracking-widest -mt-1">LUXURY B&amp;B</div>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-10 text-base font-medium">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="tenuta.html" class="nav-link active">La Tenuta</a>
+        <a href="stanze.html" class="nav-link">Le Bolle</a>
+        <a href="esperienze.html" class="nav-link">Esperienze</a>
+        <a href="territorio.html" class="nav-link">Il Territorio</a>
+        <a href="bottega.html" class="nav-link">La Bottega</a>
+        <a href="sala-eventi.html" class="nav-link">Sala Eventi</a>
+        <a href="contatti.html" class="nav-link">Contatti</a>
+      </div>
+
+      <a href="contatti.html" class="hidden lg:inline-flex items-center gap-3 bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+        <i class="far fa-calendar-alt"></i> Prenota ora
+      </a>
+
+      <button id="mobile-menu-btn" class="lg:hidden text-3xl text-amber-400">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-stone-950 border-t border-amber-900/50">
+      <div class="px-6 py-8 flex flex-col gap-6 text-center text-lg">
+        <a href="index.html">Home</a>
+        <a href="tenuta.html">La Tenuta</a>
+        <a href="stanze.html">Le Bolle</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="territorio.html">Il Territorio</a>
+        <a href="bottega.html">La Bottega</a>
+        <a href="sala-eventi.html">Sala Eventi</a>
+        <a href="contatti.html">Contatti</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-16 lg:pt-40 bg-gradient-to-b from-stone-950 to-stone-900 text-center">
+    <div class="max-w-5xl mx-auto px-6">
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold heading-font leading-tight mb-6">
+        Calendario Disponibilità
+      </h1>
+      <p class="text-xl text-amber-200/90">Clicca sui giorni verdi per richiedere la tua data preferita</p>
+    </div>
+  </section>
+
+  <!-- LE 4 SUITE CON CALENDARIO INTERATTIVO -->
+  <section class="py-16 lg:py-24 bg-stone-900">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 space-y-24">
+
+      <!-- ==================== SUITE 1 ==================== -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-1.jpg" alt="Bolla Deluxe Classic" loading="lazy">
+              <img src="camera-1-interno.jpg" alt="Interno" loading="lazy">
+              <img src="camera-1-jacuzzi.jpg" alt="Jacuzzi" loading="lazy">
+              <img src="camera-1-notte.jpg" alt="Notte" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Deluxe Classic</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 320 / notte</p>
+          <p class="text-stone-300 mb-8">La suite più intima e romantica. Ideale per coppie che desiderano privacy e un contatto diretto con le stelle.</p>
+          <ul class="space-y-3 text-stone-300">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king size</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi privata riscaldata</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Bagno privato con doccia</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Vista 360° sui campi e Maiella</li>
+          </ul>
+        </div>
+        <div class="lg:col-span-3">
+          <div id="calendar-1" class="bg-stone-800 rounded-3xl p-6 shadow-xl"></div>
+        </div>
+      </div>
+
+      <!-- ==================== SUITE 2 ==================== -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-2.jpg" alt="Bolla Deluxe Moonlight" loading="lazy">
+              <img src="camera-2-interno.jpg" alt="Interno" loading="lazy">
+              <img src="camera-2-jacuzzi.jpg" alt="Jacuzzi" loading="lazy">
+              <img src="camera-2-stelle.jpg" alt="Stelle" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Deluxe Moonlight</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 340 / notte</p>
+          <p class="text-stone-300 mb-8">Illuminazione romantica, telescopio e atmosfera magica per notti stellate indimenticabili.</p>
+          <ul class="space-y-3 text-stone-300">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Illuminazione LED romantica</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi + telescopio</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Doccia esterna stellata</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king con baldacchino</li>
+          </ul>
+        </div>
+        <div class="lg:col-span-3">
+          <div id="calendar-2" class="bg-stone-800 rounded-3xl p-6 shadow-xl"></div>
+        </div>
+      </div>
+
+      <!-- ==================== SUITE 3 ==================== -->
+    
+
+      <!-- ==================== SUITE 4 ==================== -->
+     
+
+    </div>
+  </section>
+
+  <!-- MODAL RICHIESTA -->
+  <div id="booking-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div class="bg-stone-900 rounded-3xl max-w-lg w-full mx-4 p-8">
+      <h3 class="text-3xl font-bold heading-font mb-2" id="modal-suite"></h3>
+      <p class="text-amber-400 text-xl mb-6" id="modal-date"></p>
+      
+      <form id="modal-form" class="space-y-6">
+        <input type="text" id="modal-name" placeholder="Nome e Cognome" class="w-full bg-transparent border-b border-stone-600 pb-4 focus:border-amber-400 outline-none text-lg" required>
+        <input type="email" id="modal-email" placeholder="Email" class="w-full bg-transparent border-b border-stone-600 pb-4 focus:border-amber-400 outline-none text-lg" required>
+        <textarea id="modal-message" rows="4" placeholder="Richiesta speciale o note" class="w-full bg-transparent border-b border-stone-600 pb-4 focus:border-amber-400 outline-none text-lg"></textarea>
+        
+        <div class="flex gap-4">
+          <button type="button" onclick="closeModal()" class="flex-1 py-4 border border-stone-600 rounded-full font-medium">Annulla</button>
+          <button type="submit" class="flex-1 py-4 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-full">Invia Richiesta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-black py-16 border-t border-amber-900/30">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center md:text-left">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+        <div class="flex items-center gap-4">
+          <img src="logo1.JPG" alt="Logo" class="h-10">
+          <div class="text-sm leading-none">
+            <div class="heading-font text-3xl">Bubblebee</div>
+            <div class="text-amber-400">LUXURY B&amp;B</div>
+          </div>
+        </div>
+        <div class="text-stone-500 text-sm">
+          Via Castellata 6 • 66037 Sant'Eusanio del Sangro (CH)<br>
+          P.IVA 02853900690 • © 2026 Bubblebee Luxury B&amp;B
+        </div>
+        <div class="flex gap-8 text-3xl">
+          <a href="#" class="hover:text-amber-400"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-amber-400"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // ==================== CALENDARIO INTERATTIVO ====================
+    const currentYear = 2026;
+    let currentMonth = 2; // Marzo (0 = Gennaio)
+
+    const bookedDates = {
+      1: [3,8,13,18,23,30],   // Suite 1
+      2: [5,12,19,26],        // Suite 2
+      3: [6,11,17,22,28],     // Suite 3
+      4: [4,10,15,21,27]      // Suite 4
+    };
+
+    function renderCalendar(suiteId, containerId) {
+      const container = document.getElementById(containerId);
+      const date = new Date(currentYear, currentMonth, 1);
+      const monthName = date.toLocaleString('it-IT', { month: 'long', year: 'numeric' });
+
+      let html = `
+        <div class="flex justify-between items-center mb-4">
+          <button onclick="prevMonth(${suiteId}, '${containerId}')" class="text-amber-400 hover:text-amber-300"><i class="fas fa-chevron-left"></i></button>
+          <h4 class="font-bold text-xl capitalize">${monthName}</h4>
+          <button onclick="nextMonth(${suiteId}, '${containerId}')" class="text-amber-400 hover:text-amber-300"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+          <div class="text-amber-400">L</div><div class="text-amber-400">M</div><div class="text-amber-400">M</div>
+          <div class="text-amber-400">G</div><div class="text-amber-400">V</div><div class="text-amber-400">S</div><div class="text-amber-400">D</div>
+        </div>
+        <div class="calendar-grid">`;
+
+      const firstDay = date.getDay() || 7;
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      // Giorni vuoti iniziali
+      for (let i = 1; i < firstDay; i++) {
+        html += `<div></div>`;
+      }
+
+      // Giorni del mese
+      for (let day = 1; day <= daysInMonth; day++) {
+        const today = new Date();
+        const thisDate = new Date(currentYear, currentMonth, day);
+        const isPast = thisDate < today.setHours(0,0,0,0);
+        const isBooked = bookedDates[suiteId].includes(day);
+
+        let className = 'calendar-day ';
+        if (isPast) className += 'past';
+        else if (isBooked) className += 'booked';
+        else className += 'available';
+
+        html += `
+          <div onclick="${isPast || isBooked ? '' : `selectDate(${suiteId}, ${day}, '${monthName}')`}" 
+               class="${className}">${day}</div>`;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function prevMonth(suiteId, containerId) {
+      currentMonth--;
+      if (currentMonth < 0) currentMonth = 11;
+      renderCalendar(suiteId, containerId);
+    }
+
+    function nextMonth(suiteId, containerId) {
+      currentMonth++;
+      if (currentMonth > 11) currentMonth = 0;
+      renderCalendar(suiteId, containerId);
+    }
+
+    function selectDate(suiteId, day, monthName) {
+      const suiteNames = {
+        1: "Bolla Deluxe Classic",
+        2: "Bolla Deluxe Moonlight",
+        3: "Bolla Prestige Family",
+        4: "Bolla Prestige Romantic"
+      };
+
+      document.getElementById('modal-suite').textContent = suiteNames[suiteId];
+      document.getElementById('modal-date').textContent = `${day} ${monthName} 2026`;
+
+      document.getElementById('booking-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+
+    // Inizializza tutti i calendari
+    window.onload = () => {
+      renderCalendar(1, 'calendar-1');
+      renderCalendar(2, 'calendar-2');
+      renderCalendar(3, 'calendar-3');
+      renderCalendar(4, 'calendar-4');
+    };
+
+    // Gestione frecce gallerie foto (come prima)
+    document.querySelectorAll('.suite-gallery-wrapper').forEach(wrapper => {
+      const gallery = wrapper.querySelector('.photo-gallery');
+      const left = wrapper.querySelector('.gallery-arrow.left');
+      const right = wrapper.querySelector('.gallery-arrow.right');
+
+      function update() {
+        const atStart = gallery.scrollLeft <= 0;
+        const atEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 10;
+        left.style.opacity = atStart ? '0.3' : '0.8';
+        right.style.opacity = atEnd ? '0.3' : '0.8';
+      }
+
+      left.addEventListener('click', () => gallery.scrollBy({left: -gallery.clientWidth*0.8, behavior:'smooth'}));
+      right.addEventListener('click', () => gallery.scrollBy({left: gallery.clientWidth*0.8, behavior:'smooth'}));
+
+      gallery.addEventListener('scroll', update);
+      update();
+    });
+  </script>
+</body>
+</html>
