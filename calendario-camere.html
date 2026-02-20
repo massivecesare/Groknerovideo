@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendario Camere • Bubblebee Luxury B&B</title>
+  <meta name="description" content="Verifica disponibilità in tempo reale delle nostre 4 bolle esclusive. Prenota la tua esperienza di lusso sotto le stelle."/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --gold: #d4af37; }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+      background-color: var(--gold); transition: width 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    .suite-row { transition: all 0.4s ease; }
+    .suite-row:hover { background-color: rgba(212,175,55,0.05); }
+
+    .photo-gallery {
+      display: flex; overflow-x: auto; gap: 1rem; padding: 1rem 0;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+    }
+    .photo-gallery::-webkit-scrollbar { display: none; }
+    .photo-gallery img {
+      flex: 0 0 85%; height: 320px; object-fit: cover; border-radius: 1rem;
+      scroll-snap-align: center;
+    }
+    @media (min-width: 768px) {
+      .photo-gallery img { flex: 0 0 45%; height: 380px; }
+    }
+
+    .gallery-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(30,30,30,0.7); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; border: 1px solid var(--gold);
+      opacity: 0.8; transition: all 0.3s;
+    }
+    .gallery-arrow:hover { opacity: 1; background: rgba(212,175,55,0.2); }
+
+    .calendar-day {
+      aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; border-radius: 0.5rem; transition: all 0.2s;
+    }
+    .calendar-day.available { background: #166534; color: white; }
+    .calendar-day.booked { background: #991b1b; color: white; }
+    .calendar-day.past { background: #374151; color: #9ca3af; }
+  </style>
+</head>
+<body class="bg-stone-950 text-stone-100">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-md border-b border-amber-900/50">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo1.JPG" alt="Bubblebee Logo" class="h-12 lg:h-14 w-auto">
+        <div>
+          <div class="text-3xl lg:text-4xl font-bold tracking-tight heading-font text-white">Bubblebee</div>
+          <div class="text-xs lg:text-sm text-amber-400 tracking-widest -mt-1">LUXURY B&amp;B</div>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-10 text-base font-medium">
+        <a href="index.html"        class="nav-link">Home</a>
+        <a href="tenuta.html"       class="nav-link active">La Tenuta</a>
+        <a href="stanze.html"       class="nav-link">Le Bolle</a>
+        <a href="esperienze.html"   class="nav-link">Esperienze</a>
+        <a href="territorio.html"   class="nav-link">Il Territorio</a>
+        <a href="bottega.html"      class="nav-link">La Bottega</a>
+        <a href="sala-eventi.html"  class="nav-link">Sala Eventi</a>
+        <a href="contatti.html"     class="nav-link">Contatti</a>
+      </div>
+
+      <a href="contatti.html" class="hidden lg:inline-flex items-center gap-3 bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+        <i class="far fa-calendar-alt"></i> Prenota ora
+      </a>
+
+      <button id="mobile-menu-btn" class="lg:hidden text-3xl text-amber-400">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-stone-950 border-t border-amber-900/50">
+      <div class="px-6 py-8 flex flex-col gap-6 text-center text-lg">
+        <a href="index.html">Home</a>
+        <a href="tenuta.html">La Tenuta</a>
+        <a href="stanze.html">Le Bolle</a>
+        <a href="esperienze.html">Esperienze</a>
+        <a href="territorio.html">Il Territorio</a>
+        <a href="bottega.html">La Bottega</a>
+        <a href="sala-eventi.html">Sala Eventi</a>
+        <a href="contatti.html">Contatti</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-16 lg:pt-40 bg-gradient-to-b from-stone-950 to-stone-900 text-center">
+    <div class="max-w-5xl mx-auto px-6">
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold heading-font leading-tight mb-6">
+        Calendario Disponibilità
+      </h1>
+      <p class="text-xl text-amber-200/90">Verifica in tempo reale le date libere delle nostre 4 bolle esclusive</p>
+    </div>
+  </section>
+
+  <!-- LISTA DELLE 4 SUITE -->
+  <section class="py-16 lg:py-24 bg-stone-900">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 space-y-24">
+
+      <!-- Suite 1: Deluxe Classic -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-1.jpg" alt="Bolla Deluxe Classic - Esterno" loading="lazy">
+              <img src="camera-1-interno.jpg" alt="Interno Bolla Deluxe Classic" loading="lazy">
+              <img src="camera-1-jacuzzi.jpg" alt="Jacuzzi privata Deluxe Classic" loading="lazy">
+              <img src="camera-1-notte.jpg" alt="Vista stellata Deluxe Classic" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Deluxe Classic</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 320 / notte</p>
+          <p class="text-stone-300 mb-8 leading-relaxed">
+            La suite più intima e romantica della tenuta. Perfetta per coppie che cercano privacy assoluta, contatto diretto con la natura e un’esperienza sotto le stelle indimenticabile.
+          </p>
+          <ul class="space-y-4 text-stone-300 mb-8">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king size con lenzuola in lino di alta qualità</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi privata riscaldata esterna con vista panoramica</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Bagno privato con doccia walk-in e set di cortesia premium</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Vista 360° sui campi di grano e sulla Maiella</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Minibar di benvenuto con prodotti locali</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Wi-Fi veloce e prese USB vicino al letto</li>
+          </ul>
+          <a href="contatti.html" class="inline-block bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+            Richiedi disponibilità
+          </a>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="bg-stone-800 rounded-3xl p-6 shadow-xl">
+            <h4 class="font-bold text-center mb-4 text-xl">Marzo 2026</h4>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <div class="text-amber-400 font-medium">L</div><div class="text-amber-400 font-medium">M</div><div class="text-amber-400 font-medium">M</div>
+              <div class="text-amber-400 font-medium">G</div><div class="text-amber-400 font-medium">V</div><div class="text-amber-400 font-medium">S</div><div class="text-amber-400 font-medium">D</div>
+              <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day booked">3</div>
+              <div class="calendar-day available">4</div><div class="calendar-day available">5</div><div class="calendar-day available">6</div><div class="calendar-day available">7</div>
+              <div class="calendar-day booked">8</div><div class="calendar-day available">9</div><div class="calendar-day available">10</div>
+              <div class="calendar-day available">11</div><div class="calendar-day available">12</div><div class="calendar-day booked">13</div><div class="calendar-day available">14</div>
+              <div class="calendar-day available">15</div><div class="calendar-day available">16</div><div class="calendar-day available">17</div><div class="calendar-day booked">18</div>
+              <div class="calendar-day available">19</div><div class="calendar-day available">20</div><div class="calendar-day available">21</div><div class="calendar-day available">22</div>
+              <div class="calendar-day booked">23</div><div class="calendar-day available">24</div><div class="calendar-day available">25</div><div class="calendar-day available">26</div>
+              <div class="calendar-day available">27</div><div class="calendar-day available">28</div><div class="calendar-day available">29</div><div class="calendar-day booked">30</div>
+              <div class="calendar-day available">31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suite 2: Deluxe Moonlight -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-20">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-2.jpg" alt="Bolla Deluxe Moonlight - Esterno" loading="lazy">
+              <img src="camera-2-interno.jpg" alt="Interno Bolla Deluxe Moonlight" loading="lazy">
+              <img src="camera-2-jacuzzi.jpg" alt="Jacuzzi Deluxe Moonlight" loading="lazy">
+              <img src="camera-2-stelle.jpg" alt="Illuminazione romantica Moonlight" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Deluxe Moonlight</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 340 / notte</p>
+          <p class="text-stone-300 mb-8 leading-relaxed">
+            Progettata per notti stellate magiche: illuminazione LED regolabile, telescopio per osservare la Via Lattea e un’atmosfera romantica unica.
+          </p>
+          <ul class="space-y-4 text-stone-300 mb-8">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Illuminazione LED intima con modalità “moonlight”</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi privata + telescopio professionale</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Doccia esterna con vista stelle</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king con baldacchino trasparente</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Set romantico di benvenuto (petali, champagne)</li>
+          </ul>
+          <a href="contatti.html" class="inline-block bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+            Richiedi disponibilità
+          </a>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="bg-stone-800 rounded-3xl p-6 shadow-xl">
+            <h4 class="font-bold text-center mb-4 text-xl">Marzo 2026</h4>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <div class="text-amber-400 font-medium">L</div><div class="text-amber-400 font-medium">M</div><div class="text-amber-400 font-medium">M</div>
+              <div class="text-amber-400 font-medium">G</div><div class="text-amber-400 font-medium">V</div><div class="text-amber-400 font-medium">S</div><div class="text-amber-400 font-medium">D</div>
+              <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day available">3</div>
+              <div class="calendar-day available">4</div><div class="calendar-day booked">5</div><div class="calendar-day available">6</div><div class="calendar-day available">7</div>
+              <div class="calendar-day available">8</div><div class="calendar-day available">9</div><div class="calendar-day available">10</div>
+              <div class="calendar-day booked">11</div><div class="calendar-day available">12</div><div class="calendar-day available">13</div><div class="calendar-day available">14</div>
+              <div class="calendar-day available">15</div><div class="calendar-day available">16</div><div class="calendar-day available">17</div><div class="calendar-day booked">18</div>
+              <div class="calendar-day available">19</div><div class="calendar-day available">20</div><div class="calendar-day available">21</div><div class="calendar-day available">22</div>
+              <div class="calendar-day booked">23</div><div class="calendar-day available">24</div><div class="calendar-day available">25</div><div class="calendar-day available">26</div>
+              <div class="calendar-day available">27</div><div class="calendar-day available">28</div><div class="calendar-day available">29</div><div class="calendar-day booked">30</div>
+              <div class="calendar-day available">31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suite 3: Prestige Family -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-20">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-3.jpg" alt="Bolla Prestige Family - Esterno" loading="lazy">
+              <img src="camera-3-interno.jpg" alt="Interno Bolla Prestige Family" loading="lazy">
+              <img src="camera-3-jacuzzi.jpg" alt="Jacuzzi grande Prestige Family" loading="lazy">
+              <img src="camera-3-terrazza.jpg" alt="Terrazza familiare Prestige Family" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Prestige Family</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 420 / notte</p>
+          <p class="text-stone-300 mb-8 leading-relaxed">
+            Spaziosa e versatile, ideale per famiglie o piccoli gruppi di amici. Due ambienti comunicanti per maggiore comfort e privacy.
+          </p>
+          <ul class="space-y-4 text-stone-300 mb-8">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Due ambienti comunicanti</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king + divano letto aggiuntivo</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi grande riscaldata + piscina condivisa vicina</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Terrazza privata panoramica con tavolo e sedie</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Kit famiglia con giochi e prodotti per bambini</li>
+          </ul>
+          <a href="contatti.html" class="inline-block bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+            Richiedi disponibilità
+          </a>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="bg-stone-800 rounded-3xl p-6 shadow-xl">
+            <h4 class="font-bold text-center mb-4 text-xl">Marzo 2026</h4>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <div class="text-amber-400 font-medium">L</div><div class="text-amber-400 font-medium">M</div><div class="text-amber-400 font-medium">M</div>
+              <div class="text-amber-400 font-medium">G</div><div class="text-amber-400 font-medium">V</div><div class="text-amber-400 font-medium">S</div><div class="text-amber-400 font-medium">D</div>
+              <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day available">3</div>
+              <div class="calendar-day available">4</div><div class="calendar-day available">5</div><div class="calendar-day booked">6</div><div class="calendar-day available">7</div>
+              <div class="calendar-day available">8</div><div class="calendar-day available">9</div><div class="calendar-day available">10</div>
+              <div class="calendar-day available">11</div><div class="calendar-day booked">12</div><div class="calendar-day available">13</div><div class="calendar-day available">14</div>
+              <div class="calendar-day available">15</div><div class="calendar-day available">16</div><div class="calendar-day available">17</div><div class="calendar-day available">18</div>
+              <div class="calendar-day booked">19</div><div class="calendar-day available">20</div><div class="calendar-day available">21</div><div class="calendar-day available">22</div>
+              <div class="calendar-day available">23</div><div class="calendar-day available">24</div><div class="calendar-day available">25</div><div class="calendar-day available">26</div>
+              <div class="calendar-day available">27</div><div class="calendar-day available">28</div><div class="calendar-day booked">29</div><div class="calendar-day available">30</div>
+              <div class="calendar-day available">31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suite 4: Prestige Romantic -->
+      <div class="suite-row grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <div class="suite-gallery-wrapper relative">
+            <div class="photo-gallery">
+              <img src="camera-4.jpg" alt="Bolla Prestige Romantic - Esterno" loading="lazy">
+              <img src="camera-4-interno.jpg" alt="Interno Bolla Prestige Romantic" loading="lazy">
+              <img src="camera-4-jacuzzi.jpg" alt="Jacuzzi oversize Prestige Romantic" loading="lazy">
+              <img src="camera-4-sauna.jpg" alt="Sauna privata Prestige Romantic" loading="lazy">
+            </div>
+            <button class="gallery-arrow left"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow right"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="lg:col-span-4">
+          <h2 class="text-4xl font-bold heading-font mb-4">Bolla Prestige Romantic</h2>
+          <p class="text-amber-400 text-3xl font-bold mb-6">da € 460 / notte</p>
+          <p class="text-stone-300 mb-8 leading-relaxed">
+            Il massimo del lusso per coppie in luna di miele, anniversario o fughe romantiche. Jacuzzi oversize, sauna privata e dettagli esclusivi.
+          </p>
+          <ul class="space-y-4 text-stone-300 mb-8">
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Jacuzzi oversize con idromassaggio e vista Maiella</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Sauna privata + doccia esterna stellata</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Letto king con petali di rosa e champagne all’arrivo</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Illuminazione intima regolabile e diffusore aromi</li>
+            <li><i class="fas fa-check text-amber-400 mr-3"></i>Kit premium romantico (olio massaggio, cioccolatini)</li>
+          </ul>
+          <a href="contatti.html" class="inline-block bg-amber-600 hover:bg-amber-500 text-white font-semibold px-8 py-4 rounded-full transition-colors">
+            Richiedi disponibilità
+          </a>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="bg-stone-800 rounded-3xl p-6 shadow-xl">
+            <h4 class="font-bold text-center mb-4 text-xl">Marzo 2026</h4>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <div class="text-amber-400 font-medium">L</div><div class="text-amber-400 font-medium">M</div><div class="text-amber-400 font-medium">M</div>
+              <div class="text-amber-400 font-medium">G</div><div class="text-amber-400 font-medium">V</div><div class="text-amber-400 font-medium">S</div><div class="text-amber-400 font-medium">D</div>
+              <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day available">3</div>
+              <div class="calendar-day available">4</div><div class="calendar-day available">5</div><div class="calendar-day available">6</div><div class="calendar-day available">7</div>
+              <div class="calendar-day booked">8</div><div class="calendar-day available">9</div><div class="calendar-day available">10</div>
+              <div class="calendar-day available">11</div><div class="calendar-day available">12</div><div class="calendar-day available">13</div><div class="calendar-day booked">14</div>
+              <div class="calendar-day available">15</div><div class="calendar-day available">16</div><div class="calendar-day available">17</div><div class="calendar-day available">18</div>
+              <div class="calendar-day available">19</div><div class="calendar-day booked">20</div><div class="calendar-day available">21</div><div class="calendar-day available">22</div>
+              <div class="calendar-day available">23</div><div class="calendar-day available">24</div><div class="calendar-day available">25</div><div class="calendar-day available">26</div>
+              <div class="calendar-day available">27</div><div class="calendar-day available">28</div><div class="calendar-day available">29</div><div class="calendar-day available">30</div>
+              <div class="calendar-day available">31</div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA FINALE -->
+  <section class="py-20 bg-gradient-to-b from-stone-900 to-black text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl lg:text-5xl heading-font font-bold mb-6">Pronto a scegliere la tua bolla?</h2>
+      <a href="contatti.html" class="inline-flex items-center gap-4 px-12 py-6 bg-amber-600 hover:bg-amber-500 text-white text-xl font-semibold rounded-full transition-colors">
+        <i class="far fa-calendar-alt"></i> Contattaci per prenotare
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black py-16 border-t border-amber-900/30">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-12 text-center md:text-left">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+        <div class="flex items-center gap-4">
+          <img src="logo1.JPG" alt="Logo" class="h-10">
+          <div class="text-sm leading-none">
+            <div class="heading-font text-3xl">Bubblebee</div>
+            <div class="text-amber-400">LUXURY B&amp;B</div>
+          </div>
+        </div>
+        <div class="text-stone-500 text-sm">
+          Via Castellata 6 • 66037 Sant'Eusanio del Sangro (CH)<br>
+          P.IVA 02853900690 • © 2026 Bubblebee Luxury B&amp;B
+        </div>
+        <div class="flex gap-8 text-3xl">
+          <a href="#" class="hover:text-amber-400"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-amber-400"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Gestione frecce per tutte le gallerie
+    document.querySelectorAll('.suite-gallery-wrapper').forEach(wrapper => {
+      const gallery = wrapper.querySelector('.photo-gallery');
+      const left = wrapper.querySelector('.gallery-arrow.left');
+      const right = wrapper.querySelector('.gallery-arrow.right');
+
+      function update() {
+        const atStart = gallery.scrollLeft <= 0;
+        const atEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 10;
+        left.style.opacity = atStart ? '0.3' : '0.8';
+        right.style.opacity = atEnd ? '0.3' : '0.8';
+      }
+
+      left.addEventListener('click', () => gallery.scrollBy({left: -gallery.clientWidth*0.8, behavior:'smooth'}));
+      right.addEventListener('click', () => gallery.scrollBy({left: gallery.clientWidth*0.8, behavior:'smooth'}));
+
+      gallery.addEventListener('scroll', update);
+      update();
+    });
+  </script>
+</body>
+</html>
